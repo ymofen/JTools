@@ -18,7 +18,7 @@ public class ResLoader {
 			sb.append("\n"); // 添加换行符 
 		    line = reader.readLine(); // 读取下一行 
 		};
-		return sb.toString();
+		return sb.toString();		
 	}
 	
 	public static String getClassResFile(Class cls, String resFile) throws Exception

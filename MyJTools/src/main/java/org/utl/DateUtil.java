@@ -71,6 +71,7 @@ public class DateUtil {
 		return format(new Date(),_style);
 	}
 	
+	
 	public static String dateTime2Str(Date _date)
 	{
 		if (_date==null)
@@ -266,11 +267,111 @@ public class DateUtil {
 //		System.out.println(sqlValue);
 	}
 	
+	/**
+	 *   获取这个日期的开始的时间点
+	 * @param date
+	 * @return
+	 */
+	public static Date startOfTheDay(Date date)
+	{		 
+		Calendar cal = Calendar.getInstance(); 
+		cal.setTime(date);
+		
+		cal.set(Calendar.HOUR_OF_DAY, 0);
+		cal.set(Calendar.MINUTE, 0);
+		cal.set(Calendar.SECOND, 0);
+		cal.set(Calendar.MILLISECOND, 0);
+		return cal.getTime();
+	}
+	
+	/**
+	 *   获取这个日期的最后一个时间点
+	 * @param date
+	 * @return
+	 */
+	public static Date endOfTheDay(Date date)
+	{		 
+		Calendar cal = Calendar.getInstance(); 
+		cal.setTime(date);
+		
+		cal.set(Calendar.HOUR_OF_DAY, 23);
+		cal.set(Calendar.MINUTE, 59);
+		cal.set(Calendar.SECOND, 59);
+		cal.set(Calendar.MILLISECOND, 997);
+		return cal.getTime();
+	}
+	
+	/**
+	 *   获取这个日期的所在月份的最后一个时间点
+	 * @param date
+	 * @return
+	 */
+	public static Date endOfTheMonth(Date date)
+	{		 
+		Calendar cal = Calendar.getInstance(); 
+		cal.setTime(date);
+		
+		cal.set(Calendar.HOUR_OF_DAY, 23);
+		cal.set(Calendar.MINUTE, 59);
+		cal.set(Calendar.SECOND, 59);
+		cal.set(Calendar.MILLISECOND, 997);
+		
+		//cal.set(Calendar.DAY_OF_MONTH, 1); 
+		cal.roll(Calendar.DAY_OF_MONTH, -1); 
+		return cal.getTime();
+	}
+	
+	/**
+	 *  获取这个日期的所在月份的开始时间点
+	 * @param date
+	 * @return
+	 */
+	public static Date startOfTheMonth(Date date)
+	{		 
+		Calendar cal = Calendar.getInstance(); 
+		cal.setTime(date);
+		
+		cal.set(Calendar.HOUR_OF_DAY, 0);
+		cal.set(Calendar.MINUTE, 0);
+		cal.set(Calendar.SECOND, 0);
+		cal.set(Calendar.MILLISECOND, 0);
+		
+		cal.set(Calendar.DAY_OF_MONTH, 1);
+		return cal.getTime();
+	}
+	
+	/**
+	 *   在日期上增加天数
+	 * @param date
+	 * @return
+	 */
+	public static Date incDay(Date date, int iDay)
+	{		 
+		Calendar cal = Calendar.getInstance(); 
+		cal.setTime(date);
+		cal.add(Calendar.DAY_OF_MONTH, iDay);
+		return cal.getTime();
+	}
+	
+	@Test
+	public void testDateTools() throws Exception
+	{
+		Date dt = null;
+		
+		System.out.println("incDay");
+		dt =  this.stringToDateTime("2013-12-11");
+		
+		dt = incDay(dt,1);
+		System.out.println(format(dt, "yyyy-MM-dd HH:mm:ss.S"));	
+		dt = incDay(dt, -1);
+		System.out.println(format(dt, "yyyy-MM-dd HH:mm:ss.S"));
+	}
 	
 	@Test
 	public void testDouble2Date() throws Exception
 	{
-		Date dt = new Date();
+		Date dt = new Date();		
+		
 		System.out.print("现在时间:");
 		System.out.println(format(dt, "yyyy-MM-dd HH:mm:ss.S"));
 		
