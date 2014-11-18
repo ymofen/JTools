@@ -12,5 +12,16 @@ public class SQLUtil {
 	{
 		return new Timestamp(System.currentTimeMillis()); 
 	}
+	
+	public static String toSQLString(String value)
+	{
+		if (!StringUtil.stringIsEmpty(value))
+		{
+			return StringUtil.replaceAll(value, "'", "''");				
+		}else
+		{
+			return value;
+		}
+	}
 
 }
